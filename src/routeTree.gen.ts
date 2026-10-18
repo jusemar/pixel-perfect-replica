@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BloqueiosRouteImport } from './routes/bloqueios'
+import { Route as LembretesRouteImport } from './routes/lembretes'
+import { Route as RegrasRouteImport } from './routes/regras'
+import { Route as AtividadesIndexRouteImport } from './routes/atividades.index'
+import { Route as AtividadesIdRouteImport } from './routes/atividades.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BloqueiosRoute = BloqueiosRouteImport.update({
+  id: '/bloqueios',
+  path: '/bloqueios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LembretesRoute = LembretesRouteImport.update({
+  id: '/lembretes',
+  path: '/lembretes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegrasRoute = RegrasRouteImport.update({
+  id: '/regras',
+  path: '/regras',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtividadesIndexRoute = AtividadesIndexRouteImport.update({
+  id: '/atividades/',
+  path: '/atividades/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtividadesIdRoute = AtividadesIdRouteImport.update({
+  id: '/atividades/$id',
+  path: '/atividades/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bloqueios': typeof BloqueiosRoute
+  '/lembretes': typeof LembretesRoute
+  '/regras': typeof RegrasRoute
+  '/atividades/$id': typeof AtividadesIdRoute
+  '/atividades/': typeof AtividadesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bloqueios': typeof BloqueiosRoute
+  '/lembretes': typeof LembretesRoute
+  '/regras': typeof RegrasRoute
+  '/atividades/$id': typeof AtividadesIdRoute
+  '/atividades': typeof AtividadesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bloqueios': typeof BloqueiosRoute
+  '/lembretes': typeof LembretesRoute
+  '/regras': typeof RegrasRoute
+  '/atividades/$id': typeof AtividadesIdRoute
+  '/atividades/': typeof AtividadesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bloqueios'
+    | '/lembretes'
+    | '/regras'
+    | '/atividades/$id'
+    | '/atividades/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bloqueios'
+    | '/lembretes'
+    | '/regras'
+    | '/atividades/$id'
+    | '/atividades'
+  id:
+    | '__root__'
+    | '/'
+    | '/bloqueios'
+    | '/lembretes'
+    | '/regras'
+    | '/atividades/$id'
+    | '/atividades/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BloqueiosRoute: typeof BloqueiosRoute
+  LembretesRoute: typeof LembretesRoute
+  RegrasRoute: typeof RegrasRoute
+  AtividadesIdRoute: typeof AtividadesIdRoute
+  AtividadesIndexRoute: typeof AtividadesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bloqueios': {
+      id: '/bloqueios'
+      path: '/bloqueios'
+      fullPath: '/bloqueios'
+      preLoaderRoute: typeof BloqueiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lembretes': {
+      id: '/lembretes'
+      path: '/lembretes'
+      fullPath: '/lembretes'
+      preLoaderRoute: typeof LembretesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/regras': {
+      id: '/regras'
+      path: '/regras'
+      fullPath: '/regras'
+      preLoaderRoute: typeof RegrasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atividades/': {
+      id: '/atividades/'
+      path: '/atividades'
+      fullPath: '/atividades/'
+      preLoaderRoute: typeof AtividadesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atividades/$id': {
+      id: '/atividades/$id'
+      path: '/atividades/$id'
+      fullPath: '/atividades/$id'
+      preLoaderRoute: typeof AtividadesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BloqueiosRoute: BloqueiosRoute,
+  LembretesRoute: LembretesRoute,
+  RegrasRoute: RegrasRoute,
+  AtividadesIdRoute: AtividadesIdRoute,
+  AtividadesIndexRoute: AtividadesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
